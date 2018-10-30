@@ -94,8 +94,10 @@ gstCamera::~gstCamera()
 // ConvertRGBA
 bool gstCamera::ConvertRGBA( void* input, void** output, bool zeroCopy )
 {
-	if( !input || !output )
+	if( !input || !output ){
+		std::cout << "DEBUG: 0\n";
 		return false;
+	}
 	
 	if( !mRGBA[0] )
 	{
@@ -111,12 +113,14 @@ bool gstCamera::ConvertRGBA( void* input, void** output, bool zeroCopy )
 				if( !cudaAllocMapped(&cpuPtr, &gpuPtr, size) )
 				{
 					printf(LOG_CUDA "gstCamera -- failed to allocate zeroCopy memory for %ux%xu RGBA texture\n", mWidth, mHeight);
+					std::cout << "DEBUG: 1\n";
 					return false;
 				}
 
 				if( cpuPtr != gpuPtr )
 				{
 					printf(LOG_CUDA "gstCamera -- zeroCopy memory has different pointers, please use a UVA-compatible GPU\n");
+					std::cout << "DEBUG: 2\n";
 					return false;
 				}
 
@@ -127,6 +131,7 @@ bool gstCamera::ConvertRGBA( void* input, void** output, bool zeroCopy )
 				if( CUDA_FAILED(cudaMalloc(&mRGBA[n], size)) )
 				{
 					printf(LOG_CUDA "gstCamera -- failed to allocate memory for %ux%u RGBA texture\n", mWidth, mHeight);
+					std::cout << "DEBUG: 3\n";
 					return false;
 				}
 			}
