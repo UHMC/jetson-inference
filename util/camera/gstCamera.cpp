@@ -29,6 +29,7 @@
 #include <sstream> 
 #include <unistd.h>
 #include <string.h>
+#include <iostream>
 
 #include <QMutex>
 #include <QWaitCondition>
@@ -137,12 +138,14 @@ bool gstCamera::ConvertRGBA( void* input, void** output, bool zeroCopy )
 	if( onboardCamera() )
 	{
 		// onboard camera is NV12
+		std::cout << "DEBUG: onboardCamera() returned TRUE\n";
 		if( CUDA_FAILED(cudaNV12ToRGBAf((uint8_t*)input, (float4*)mRGBA[mLatestRGBA], mWidth, mHeight)) )
 			return false;
 	}
 	else
 	{
 		// USB webcam is RGB
+		std::cout << "DEBUG: onboardCamera() returned FALSE\n";
 		if( CUDA_FAILED(cudaRGBToRGBAf((uchar3*)input, (float4*)mRGBA[mLatestRGBA], mWidth, mHeight)) )
 			return false;
 	}
