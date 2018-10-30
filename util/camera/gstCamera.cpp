@@ -220,6 +220,7 @@ bool gstCamera::Capture( void** cpu, void** cuda, unsigned long timeout )
 		*cpu = mRingbufferCPU[latest];
 	
 	if( cuda != NULL )
+		std::cout << "DEBUG: 4\n";
 		*cuda = mRingbufferGPU[latest];
 	
 	return true;
