@@ -175,7 +175,7 @@ int main( int argc, char** argv )
 		void* imgCUDA = NULL;
 		
 		// get the latest frame
-		if( !camera->Capture(&imgCPU, &imgCUDA, 2000) )
+		if( !camera->Capture(&imgCPU, &imgCUDA, 1000) )
 			printf("\ndetectnet-camera:  failed to capture frame\n");
 
 		// convert from YUV to RGBA
