@@ -96,6 +96,10 @@ bool gstCamera::ConvertRGBA( void* input, void** output, bool zeroCopy )
 {
 	if( !input || !output ){
 		std::cout << "DEBUG: 0\n";
+		if(!input)
+			std::cout << "DEBUG: !input\n";
+		if(!output)
+			std::cout << "DEBUG: !output\n";
 		return false;
 	}
 	
